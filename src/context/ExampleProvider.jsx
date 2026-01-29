@@ -9,8 +9,31 @@ export const ExampleProvider = ({ children }) => {
     email:"apple@example.com"
   });
 
+  // 🔹 Contact data (GLOBAL)
+  const [contact, setContact] = useState({
+    contactName: "",
+    contactEmail: "",
+    message: "",
+  });
+
+  const updateContact = (e) => {
+    const { name, value } = e.target;
+    setContact((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const resetContact = () => {
+    setContact({
+      contactName: "",
+      contactEmail: "",
+      message: "",
+    });
+  };
+
   return (
-    <ExampleContext.Provider value={{ data, setData }}>
+    <ExampleContext.Provider value={{ data, setData, contact,setContact, updateContact, resetContact }}>
       {children}
     </ExampleContext.Provider>
   );
